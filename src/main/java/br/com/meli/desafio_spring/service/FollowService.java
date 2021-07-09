@@ -1,12 +1,17 @@
 package br.com.meli.desafio_spring.service;
 
+import br.com.meli.desafio_spring.dto.customer.CustomerDTO;
 import br.com.meli.desafio_spring.dto.seller.SellerFollowsCountDTO;
+import br.com.meli.desafio_spring.dto.seller.SellerFollowsDTO;
 import br.com.meli.desafio_spring.entity.Customer;
 import br.com.meli.desafio_spring.entity.Seller;
 import br.com.meli.desafio_spring.repository.CustomerRepository;
 import br.com.meli.desafio_spring.repository.SellerRepository;
+import br.com.meli.desafio_spring.util.mapper.seller.SellerFollowsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Comparator;
 
 @Service
 public class FollowService {
@@ -32,6 +37,12 @@ public class FollowService {
         Seller seller = sellerRepository.findOne(sellerId);
 
         return new SellerFollowsCountDTO(seller.getId(), seller.getName(), seller.getFollow().size());
+    }
+
+    public SellerFollowsDTO sellerFollows(Integer sellerId) {
+        Seller seller = sellerRepository.findOne(sellerId);
+
+        return SellerFollowsMapper.toDTO(seller);
     }
 
 }

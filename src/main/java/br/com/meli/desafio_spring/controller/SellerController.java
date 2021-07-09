@@ -24,6 +24,11 @@ public class SellerController {
         return ResponseEntity.status(HttpStatus.OK).body(followService.countFollows(id));
     }
 
+    @GetMapping("/{id}/followers/list")
+    public ResponseEntity<?> getFollowersList(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(followService.sellerFollows(id));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody SellerDTO sellerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(sellerService.create(sellerDTO));
