@@ -18,6 +18,11 @@ public class CustomerController {
     @Autowired
     private FollowService followService;
 
+    @GetMapping("/{id}/followers/list")
+    public ResponseEntity<?> getFollowersList(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(followService.customerFollows(id));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CustomerDTO customerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(customerDTO));
