@@ -15,8 +15,8 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<?> getPosts(@PathVariable Integer userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(postService.getPostsFromSeller(userId));
+    public ResponseEntity<?> getPosts(@PathVariable Integer userId, @RequestParam(required = false, defaultValue = "") String order) {
+        return ResponseEntity.status(HttpStatus.OK).body(postService.getPostsFromSeller(userId, order));
 
     }
 

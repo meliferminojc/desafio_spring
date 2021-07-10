@@ -44,9 +44,15 @@ public class PostService {
         return PostMapper.toDTO(post);
     }
 
-    public ResponsePostsFromSellerDTO getPostsFromSeller(Integer userId) {
+    public ResponsePostsFromSellerDTO getPostsFromSeller(Integer userId, String order) {
         Customer customer = customerRepository.findOne(userId);
         List<Post> postsList = getLast2WeeksPosts(postRepository.getPostsList());
+
+        postsList.sort(Comparator.comparing(Post::getLocalDate).reversed());
+
+        if(order.equals("date_asc")) {
+            postsList.sort(Comparator.comparing(Post::getLocalDate));
+        }
 
         return PostsFromSellerMapper.toDTO(customer, postsList);
     }
