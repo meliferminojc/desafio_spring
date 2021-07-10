@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/seller")
 public class SellerController {
@@ -30,7 +32,7 @@ public class SellerController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody SellerDTO sellerDTO) {
+    public ResponseEntity<?> create(@RequestBody @Valid SellerDTO sellerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(sellerService.create(sellerDTO));
     }
 }

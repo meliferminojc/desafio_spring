@@ -9,7 +9,7 @@ public class ResponsePostDTO {
     protected Integer userId;
 
     @JsonFormat
-            (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     protected Date date;
     protected Product product;
     protected Integer category;
