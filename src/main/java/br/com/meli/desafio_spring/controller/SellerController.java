@@ -25,8 +25,8 @@ public class SellerController {
     }
 
     @GetMapping("/{id}/followers/list")
-    public ResponseEntity<?> getFollowersList(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(followService.sellerFollows(id));
+    public ResponseEntity<?> getFollowersList(@PathVariable Integer id, @RequestParam(required = false, defaultValue = "") String order) {
+        return ResponseEntity.status(HttpStatus.OK).body(followService.sellerFollows(id, order));
     }
 
     @PostMapping("/create")

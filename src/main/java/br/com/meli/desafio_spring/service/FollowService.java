@@ -48,14 +48,29 @@ public class FollowService {
         return new SellerFollowsCountDTO(seller.getId(), seller.getName(), seller.getFollow().size());
     }
 
-    public SellerFollowsDTO sellerFollows(Integer sellerId) {
+    public SellerFollowsDTO sellerFollows(Integer sellerId, String order) {
         Seller seller = sellerRepository.findOne(sellerId);
+        SellerFollowsDTO sellerFollowsDTO = SellerFollowsMapper.toDTO(seller);
 
-        return SellerFollowsMapper.toDTO(seller);
+        if (order.equals("name_asc")){
+            sellerFollowsDTO.getFollows().sort(Comparator.comparing(CustomerDTO::getName));
+        }
+        if (order.equals("name_desc")){
+            sellerFollowsDTO.getFollows().sort(Comparator.comparing(CustomerDTO::getName).reversed());
+        }
+
+        return sellerFollowsDTO;
     }
 
-    public CustomerFollowsDTO customerFollows(Integer customerId) {
+    public CustomerFollowsDTO customerFollows(Integer customerId, String order) {
         Customer customer = customerRepository.findOne(customerId);
+
+        if (order.equals("name_asc")){
+            customer.getFollows().sort(Comparator.comparing(Seller::getName));
+        }
+        if (order.equals("name_desc")){
+            customer.getFollows().sort(Comparator.comparing(Seller::getName).reversed());
+        }
 
         return CustomerFollowsMapper.toDTO(customer);
     }
