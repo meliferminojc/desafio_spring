@@ -30,4 +30,9 @@ public class CustomerRepository {
         seller.getFollow().add(customer);
     }
 
+    public void unfollow(Seller seller, Customer customer) {
+        customer.getFollows().remove(seller);
+        seller.getFollow().remove(customer);
+    }
+
 }

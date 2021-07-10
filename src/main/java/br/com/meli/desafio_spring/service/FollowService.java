@@ -35,6 +35,13 @@ public class FollowService {
         customerRepository.follow(seller, customer);
     }
 
+    public void unfollow(Integer customerId, Integer sellerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        Seller seller = sellerRepository.findOne(sellerId);
+
+        customerRepository.unfollow(seller, customer);
+    }
+
     public SellerFollowsCountDTO countFollows(Integer sellerId){
         Seller seller = sellerRepository.findOne(sellerId);
 

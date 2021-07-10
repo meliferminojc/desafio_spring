@@ -33,4 +33,10 @@ public class CustomerController {
         followService.follow(customerId, sellerId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @PostMapping("/{customerId}/unfollow/{sellerId}")
+    public ResponseEntity<?> unfollow(@PathVariable Integer customerId, @PathVariable Integer sellerId) {
+        followService.unfollow(customerId, sellerId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
