@@ -62,14 +62,11 @@ public class PostService {
 
         return PostsFromSellerMapper.toDTO(customer, postsList);
     }
+    public PromoPostListDTO getPromoPostsFromSeller(Integer userId) {
+        Seller seller = sellerRepository.findOne(userId);
+        List<PromoPost> promoPostsList = postRepository.getPromoPostsList().stream().filter(pp -> pp.getSeller().equals(seller.getId())).collect(Collectors.toList());
 
-    private List<Post> getLast2WeeksPosts(List<Post> posts) {
-        LocalDate twoWeeksAgo = LocalDate.now().minusDays(14);
-        return posts
-                .stream()
-                .filter(post -> twoWeeksAgo.compareTo(post.getLocalDate()) <= 0)
-                .collect(Collectors.toList());
-
+        return new PromoPostListDTO(seller.getId(), seller.getName(), promoPostsList);
     }
 
     public CountPromoPostDTO getCountPromoPostsFromSeller(Integer userId) {
@@ -78,5 +75,14 @@ public class PostService {
 
         Integer promoCount = promoPostsList.stream().filter(pp -> pp.getSeller().equals(seller.getId())).collect(Collectors.toList()).size();
         return new CountPromoPostDTO(seller.getId(), seller.getName(), promoCount);
+    }
+
+    private List<Post> getLast2WeeksPosts(List<Post> posts) {
+        LocalDate twoWeeksAgo = LocalDate.now().minusDays(14);
+        return posts
+                .stream()
+                .filter(post -> twoWeeksAgo.compareTo(post.getLocalDate()) <= 0)
+                .collect(Collectors.toList());
+
     }
 }

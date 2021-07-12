@@ -20,13 +20,16 @@ public class PostController {
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<?> getPosts(@PathVariable Integer userId, @RequestParam(required = false, defaultValue = "") String order) {
         return ResponseEntity.status(HttpStatus.OK).body(postService.getPostsFromSeller(userId, order));
+    }
 
+    @GetMapping("/followed/{userId}/promolist")
+    public ResponseEntity<?> getPosts(@PathVariable Integer userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(postService.getPromoPostsFromSeller(userId));
     }
 
     @GetMapping("/{userId}/countPromo/list")
     public ResponseEntity<?> getPromoPostsCount(@PathVariable Integer userId) {
         return ResponseEntity.status(HttpStatus.OK).body(postService.getCountPromoPostsFromSeller(userId));
-
     }
 
     @PostMapping("/newpost")

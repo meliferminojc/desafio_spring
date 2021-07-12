@@ -211,12 +211,44 @@
 
 - Get Total Seller PromoPosts
   - `Integer: sellerID`
-  - `GET http://localhost:8080/api/products/1/countPromo/list`
+  - `GET http://localhost:8080/api/products/{sellerID}/countPromo/list`
   - Response
 ```json
 {
   "userId": 1,
   "userName": "Renan Fermino",
   "promoProducts_count": 6
+}
+```
+
+- Get Seller PromoPosts
+  - `Integer: sellerID`
+  - `GET http://localhost:8080/api/products/followed/{sellerID}/promolist`
+  - Response
+```json
+{
+
+  "userId": 1,
+  "userName": "Marcelo Eugenio",
+  "posts": [
+    {
+      "id": 1,
+      "date": "01-07-2021",
+      "seller": 1,
+      "product": {
+        "id": 1,
+        "productName": "Cadeira Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+      },
+      "categoryId": 1,
+      "price": 1500.5,
+      "discount": 1.25,
+      "hasDiscount": true,
+      "localDate": "2021-06-30"
+    }
+  ]
 }
 ```
