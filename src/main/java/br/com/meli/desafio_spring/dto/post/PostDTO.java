@@ -9,21 +9,21 @@ import java.util.Date;
 public class PostDTO {
 
     @NotNull(message = "Seller id não pode estar vazio.")
-    private Integer sellerId;
+    protected Integer sellerId;
 
     @NotNull(message = "Data não pode estar vazia.")
     @JsonFormat
     (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date date;
+    protected Date date;
 
     @NotNull(message = "Produto não pode estar vazio.")
-    private Product product;
+    protected Product product;
 
     @NotNull(message = "Categoria ID não pode estar vazia.")
-    private Integer categoryId;
+    protected Integer categoryId;
 
     @NotNull(message = "Price não pode estar vazio.")
-    private Double price;
+    protected Double price;
 
     public PostDTO() {
     }
@@ -31,6 +31,12 @@ public class PostDTO {
     public PostDTO(Integer sellerId, Date date, Integer categoryId, Double price) {
         this.sellerId = sellerId;
         this.date = date;
+        this.categoryId = categoryId;
+        this.price = price;
+    }
+
+    public PostDTO(Integer sellerId, Integer categoryId, Double price) {
+        this.sellerId = sellerId;
         this.categoryId = categoryId;
         this.price = price;
     }
@@ -53,5 +59,9 @@ public class PostDTO {
 
     public Double getPrice() {
         return price;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

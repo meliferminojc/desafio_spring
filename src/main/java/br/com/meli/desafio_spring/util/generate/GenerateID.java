@@ -7,6 +7,7 @@ public class GenerateID {
     private static Integer idProduct = 1;
     private static Integer idCategory = 1;
     private static Integer idPost = 1;
+    private static Integer idPromoPost = 1;
 
     public static Integer ToCusomer() {
         return idCustomer++;
@@ -28,5 +29,6 @@ public class GenerateID {
         return idPost++;
     }
 
+    public static Integer ToPromoPost() { return idPromoPost++; }
 
 }

@@ -2,17 +2,17 @@ package br.com.meli.desafio_spring.service;
 
 import br.com.meli.desafio_spring.dto.customer.ResponsePostsFromSellerDTO;
 import br.com.meli.desafio_spring.dto.post.PostDTO;
+import br.com.meli.desafio_spring.dto.post.PromoPostDTO;
 import br.com.meli.desafio_spring.dto.post.ResponsePostDTO;
-import br.com.meli.desafio_spring.entity.Category;
-import br.com.meli.desafio_spring.entity.Customer;
-import br.com.meli.desafio_spring.entity.Post;
-import br.com.meli.desafio_spring.entity.Seller;
+import br.com.meli.desafio_spring.dto.post.ResponsePromoPostDTO;
+import br.com.meli.desafio_spring.entity.*;
 import br.com.meli.desafio_spring.repository.CategoryRepository;
 import br.com.meli.desafio_spring.repository.CustomerRepository;
 import br.com.meli.desafio_spring.repository.PostRepository;
 import br.com.meli.desafio_spring.repository.SellerRepository;
 import br.com.meli.desafio_spring.util.mapper.post.PostMapper;
 import br.com.meli.desafio_spring.util.mapper.post.PostsFromSellerMapper;
+import br.com.meli.desafio_spring.util.mapper.post.PromoPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +42,15 @@ public class PostService {
         Post post = postRepository.save(PostMapper.toEntity(postDTO, seller.getId(), category));
 
         return PostMapper.toDTO(post);
+    }
+
+    public ResponsePromoPostDTO createPromoPost(PromoPostDTO promoPostDTO) {
+        Category category = categoryRepository.findOne(promoPostDTO.getCategoryId());
+        Seller seller = sellerRepository.findOne(promoPostDTO.getSellerId());
+
+        PromoPost promoPost = postRepository.savePromo(PromoPostMapper.toEntity(promoPostDTO, seller.getId(), category));
+
+        return PromoPostMapper.toDTO(promoPost);
     }
 
     public ResponsePostsFromSellerDTO getPostsFromSeller(Integer userId, String order) {

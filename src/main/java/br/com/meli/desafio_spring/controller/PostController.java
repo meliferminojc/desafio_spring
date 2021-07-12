@@ -1,6 +1,7 @@
 package br.com.meli.desafio_spring.controller;
 
 import br.com.meli.desafio_spring.dto.post.PostDTO;
+import br.com.meli.desafio_spring.dto.post.PromoPostDTO;
 import br.com.meli.desafio_spring.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,5 +26,10 @@ public class PostController {
     @PostMapping("/newpost")
     public ResponseEntity<?> createPost(@RequestBody @Valid PostDTO postDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.create(postDTO));
+    }
+
+    @PostMapping("/newpromopost")
+    public ResponseEntity<?> createPromoPost(@RequestBody @Valid PromoPostDTO promoPostDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(postService.createPromoPost(promoPostDTO));
     }
 }

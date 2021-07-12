@@ -168,3 +168,43 @@
   ]
 }
 ```
+
+- Create PromoPost
+  - `POST http://localhost:8080/api/products/newpromopost`
+  - Body request
+```json
+{
+  "sellerId": 1,
+  "date": "01-07-2021",
+  "product": {
+    "productName": "Cadeira Gamer",
+    "type": "Gamer",
+    "brand": "Racer",
+    "color": "Red & Black",
+    "notes": "Special Edition"
+  },
+  "categoryId": 1,
+  "price": 1500.50,
+  "hasPromo": true,
+  "discount": 1.25
+}
+```
+- Response
+```json
+{
+  "userId": 1,
+  "date": "01-07-2021",
+  "product": {
+    "id": 1,
+    "productName": "Cadeira Gamer",
+    "type": "Gamer",
+    "brand": "Racer",
+    "color": "Red & Black",
+    "notes": "Special Edition"
+  },
+  "category": 1,
+  "price": 1500.5,
+  "hasPromo": true,
+  "discount": 1.25
+}
+```
