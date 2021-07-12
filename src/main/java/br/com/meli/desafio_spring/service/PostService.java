@@ -1,10 +1,7 @@
 package br.com.meli.desafio_spring.service;
 
 import br.com.meli.desafio_spring.dto.customer.ResponsePostsFromSellerDTO;
-import br.com.meli.desafio_spring.dto.post.PostDTO;
-import br.com.meli.desafio_spring.dto.post.PromoPostDTO;
-import br.com.meli.desafio_spring.dto.post.ResponsePostDTO;
-import br.com.meli.desafio_spring.dto.post.ResponsePromoPostDTO;
+import br.com.meli.desafio_spring.dto.post.*;
 import br.com.meli.desafio_spring.entity.*;
 import br.com.meli.desafio_spring.repository.CategoryRepository;
 import br.com.meli.desafio_spring.repository.CustomerRepository;
@@ -73,5 +70,13 @@ public class PostService {
                 .filter(post -> twoWeeksAgo.compareTo(post.getLocalDate()) <= 0)
                 .collect(Collectors.toList());
 
+    }
+
+    public CountPromoPostDTO getCountPromoPostsFromSeller(Integer userId) {
+        Seller seller = sellerRepository.findOne(userId);
+        List<PromoPost> promoPostsList = postRepository.getPromoPostsList();
+
+        Integer promoCount = promoPostsList.stream().filter(pp -> pp.getSeller().equals(seller.getId())).collect(Collectors.toList()).size();
+        return new CountPromoPostDTO(seller.getId(), seller.getName(), promoCount);
     }
 }

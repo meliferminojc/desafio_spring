@@ -208,3 +208,15 @@
   "discount": 1.25
 }
 ```
+
+- Get Total Seller PromoPosts
+  - `Integer: sellerID`
+  - `GET http://localhost:8080/api/products/1/countPromo/list`
+  - Response
+```json
+{
+  "userId": 1,
+  "userName": "Renan Fermino",
+  "promoProducts_count": 6
+}
+```

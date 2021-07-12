@@ -27,4 +27,8 @@ public class PostRepository {
     public List<Post> getPostsList() {
         return postsList;
     }
+
+    public List<PromoPost> getPromoPostsList() {
+        return promoPostsList;
+    }
 }

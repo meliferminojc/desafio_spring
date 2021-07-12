@@ -23,6 +23,12 @@ public class PostController {
 
     }
 
+    @GetMapping("/{userId}/countPromo/list")
+    public ResponseEntity<?> getPromoPostsCount(@PathVariable Integer userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(postService.getCountPromoPostsFromSeller(userId));
+
+    }
+
     @PostMapping("/newpost")
     public ResponseEntity<?> createPost(@RequestBody @Valid PostDTO postDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.create(postDTO));
