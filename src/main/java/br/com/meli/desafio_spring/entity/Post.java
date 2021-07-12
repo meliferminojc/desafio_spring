@@ -12,7 +12,7 @@ public class Post {
     (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date date;
     private Integer seller;
-    private br.com.meli.desafio_spring.entity.Product product;
+    private Product product;
     private Integer categoryId;
     private Double price;
 
